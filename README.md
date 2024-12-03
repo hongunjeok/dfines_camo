@@ -6,6 +6,9 @@
     <a href="https://github.com/ShihuaHuang95/DEIM/blob/master/LICENSE">
         <img alt="license" src="https://img.shields.io/badge/LICENSE-Apache%202.0-blue">
     </a>
+    <a href="https://arxiv.org/abs/2412.xx">
+        <img alt="arXiv" src="https://img.shields.io/badge/arXiv-Coming%20Soon-red">
+    </a>
     <a href="https://github.com/ShihuaHuang95/DEIM/pulls">
         <img alt="prs" src="https://img.shields.io/github/issues-pr/ShihuaHuang95/DEIM">
     </a>
@@ -15,24 +18,36 @@
     <a href="https://github.com/ShihuaHuang95/DEIM">
         <img alt="stars" src="https://img.shields.io/github/stars/ShihuaHuang95/DEIM">
     </a>
-    <a href="https://arxiv.org/abs/2412.xx">
-        <img alt="arXiv" src="https://img.shields.io/badge/arXiv-2410.xx-red">
+    <a href="mailto:shihuahuang95@gmail.com">
+        <img alt="Contact Us" src="https://img.shields.io/badge/Contact-Email-yellow">
     </a>
-    <a href="mailto: shihuahuang95@gmail.com">
-        <img alt="email" src="https://img.shields.io/badge/contact_me-email-yellow">
 </p>
 
-<div align="center">
 <p align="center">
-[Shihua Huang](http://www.shihuahuang.cn/)<sup>1</sup>, [Zhichao Lu](https://scholar.google.com/citations?user=tIFWBcQAAAAJ&hl=en)<sup>2</sup>, [Xiaodong Cun](https://vinthony.github.io/academic/)<sup>3</sup>, Yongjun Yu<sup>1</sup>, Xiao Zhou<sup>4</sup>, [Xi Shen](https://xwcv.github.io)<sup>1 :email:</sup>
- </p>
+  DEIM is a novel training framewokr that enhances the matching mechanism in the DETR framework, achieving faster convergence and higher accuracy for real-time DETRs.
+</p>
 
-<sup>1</sup> Intellindust AI Lab, <sup>2</sup> City University of Hong Kong, <sup>3</sup> Great Bay University , <sup>4</sup> Hefei Normal University
+---
 
+<p align="center">
+    [Shihua Huang](http://www.shihuahuang.cn/)<sup>1</sup>, 
+    [Zhichao Lu](https://scholar.google.com/citations?user=tIFWBcQAAAAJ&hl=en)<sup>2</sup>, 
+    [Xiaodong Cun](https://vinthony.github.io/academic/)<sup>3</sup>, 
+    [Yongjun Yu](#)<sup>1</sup>, 
+    [Xiao Zhou](#)<sup>4</sup>, 
+    [Xi Shen](https://xwcv.github.io)<sup>1</sup>
+</p>
+
+<p align="center">
+<i>
+1. Intellindust AI Lab &nbsp; 2. City University of Hong Kong &nbsp; 3. Great Bay University &nbsp; 4. Hefei Normal University
+</i>
+</p>
+
+<p align="center">
 (<sup>:email:</sup>) corresponding author, shenxiluc@gmail.com
-(<sup>:email:</sup>) project leader, shihuahuang95@gmail.com
+</p>
 
-</div>
 <p align="center">
 <strong>If you like , please give us a ⭐! Your support motivates us to keep improving!</strong>
 </p>
@@ -41,12 +56,10 @@
     <img src="./figures/teaser.png" width="1000">
 </p>
 
-DEIM is a real-time training framework that builds on detection with Transformer (DETR) and provides state-of-the-art DETRs, includes [D-FINE](https://arxiv.org/abs/2410.13842) and [RT-DETR](https://arxiv.org/abs/2407.17140).  
-
 </details>
 
 ## 🚀 Updates
-- [x] **\[2024.12.03\]** Release DEIM series. Besides, DEIM repo supports the re-implmentations of D-FINE and RT-DETR.
+- [x] **\[2024.12.03\]** Release DEIM series. Besides, DEIM repo supports the re-implmentations of [D-FINE](https://arxiv.org/abs/2410.13842) and [RT-DETR](https://arxiv.org/abs/2407.17140).
 
 ## Model Zoo
 
