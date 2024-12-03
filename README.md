@@ -28,7 +28,7 @@
 </p>
 
 ---
-
+<!-- 
 <p align="center">
     [Shihua Huang](http://www.shihuahuang.cn/)<sup>1</sup>, 
     [Zhichao Lu](https://scholar.google.com/citations?user=tIFWBcQAAAAJ&hl=en)<sup>2</sup>, 
@@ -36,6 +36,15 @@
     [Yongjun Yu](#)<sup>1</sup>, 
     [Xiao Zhou](#)<sup>4</sup>, 
     [Xi Shen](https://xwcv.github.io)<sup>1</sup>
+</p> -->
+
+<p align="center">
+    Shihua Huang<sup>1</sup>, 
+    Zhichao Lu<sup>2</sup>,
+    Xiaodong Cun<sup>3</sup>,
+    Yongjun Yu<sup>1</sup>,
+    Xiao Zhou<sup>4</sup>, 
+    Xi Shen<sup>1</sup>
 </p>
 
 <p align="center">
@@ -45,7 +54,7 @@
 </p>
 
 <p align="center">
-(<sup>:email:</sup>) corresponding author, shenxiluc@gmail.com
+  **📧 Corresponding author:** <a href="mailto:shenxiluc@gmail.com">shenxiluc@gmail.com</a>
 </p>
 
 <p align="center">
@@ -53,7 +62,7 @@
 </p>
 
 <p align="center">
-    <img src="./figures/teaser.png" width="1000">
+    <img src="./figures/teaser.pdf" width="1000">
 </p>
 
 </details>
