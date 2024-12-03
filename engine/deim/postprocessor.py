@@ -77,7 +77,7 @@ class PostProcessor(nn.Module):
 
         # TODO
         if self.remap_mscoco_category:
-            from ...data.dataset import mscoco_label2category
+            from ..data.dataset import mscoco_label2category
             labels = torch.tensor([mscoco_label2category[int(x.item())] for x in labels.flatten()])\
                 .to(boxes.device).reshape(labels.shape)
 
