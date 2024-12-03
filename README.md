@@ -62,7 +62,7 @@
 </p>
 
 <p align="center">
-    <img src="./figures/teaser.pdf" width="1000">
+    <img src="./figures/teaser.png" width="1000">
 </p>
 
 </details>
