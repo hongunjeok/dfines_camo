@@ -13,7 +13,7 @@
         <img alt="issues" src="https://img.shields.io/github/issues/ShihuaHuang95/DEIM?color=olive">
     </a>
     <a href="https://github.com/ShihuaHuang95/DEIM">
-        <img alt="stars" src="https://img.shields.io/github/ShihuaHuang95/DEIM">
+        <img alt="stars" src="https://img.shields.io/github/stars/ShihuaHuang95/DEIM">
     </a>
     <a href="https://arxiv.org/abs/2412.xx">
         <img alt="arXiv" src="https://img.shields.io/badge/arXiv-2410.xx-red">
