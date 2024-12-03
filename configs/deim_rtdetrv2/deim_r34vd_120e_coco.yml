@@ -1,0 +1,66 @@
+__include__: [
+  './rtdetrv2_r34vd_120e_coco.yml',
+]
+
+
+output_dir: ./outputs/deim_rtdetrv2_r34vd_120e_coco
+
+PResNet:
+  freeze_at: -1     # default 0
+  freeze_norm: False   # default True
+
+RTDETRTransformerv2:
+  query_pos_method: as_reg
+  activation: silu
+  mlp_act: silu
+  
+optimizer:
+  type: AdamW
+  params:
+    - 
+      params: '^(?=.*backbone)(?!.*norm).*$'
+      lr: 0.0001
+    - 
+      params: '^(?=.*(?:norm|bn)).*$'
+      weight_decay: 0.
+
+  lr: 0.0002
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+
+# change part
+epoches: 120
+lrsheduler: flatcosine
+lr_gamma: 0.5
+warmup_iter: 2000
+flat_epoch: 64
+no_aug_epoch: 3
+
+train_dataloader: 
+  dataset: 
+    transforms:
+      ops:
+        - {type: Mosaic, output_size: 320, rotation_range: 10, translation_range: [0.1, 0.1], scaling_range: [0.5, 1.5], probability: 1.0, fill_value: 0}
+        - {type: RandomPhotometricDistort, p: 0.5}
+        - {type: RandomZoomOut, fill: 0}
+        - {type: RandomIoUCrop, p: 0.8}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [640, 640], }
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: 'float32', scale: True}   
+        - {type: ConvertBoxes, fmt: 'cxcywh', normalize: True}
+      policy:
+        epoch: [4, 64, 117]   # list 
+      mosaic_prob: 0.5
+      
+  collate_fn:
+    mixup_prob: 0.5
+    mixup_epochs: [4, 64]
+    stop_epoch: 117
+
+DEIMCriterion:
+  weight_dict: {loss_mal: 1, loss_bbox: 5, loss_giou: 2}
+  losses: ['mal', 'boxes', ]
+  gamma: 1.5
