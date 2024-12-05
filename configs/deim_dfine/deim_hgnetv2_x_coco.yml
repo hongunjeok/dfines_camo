@@ -3,7 +3,6 @@ __include__: [
   '../base/deim.yml'
 ]
 
-
 output_dir: ./outputs/deim_hgnetv2_x_coco
   
 optimizer:

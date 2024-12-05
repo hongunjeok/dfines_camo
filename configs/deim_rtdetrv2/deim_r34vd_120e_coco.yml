@@ -3,7 +3,6 @@ __include__: [
   '../base/rt_deim.yml',
 ]
 
-
 output_dir: ./outputs/deim_rtdetrv2_r34vd_120e_coco
 
 optimizer:
