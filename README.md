@@ -9,6 +9,9 @@
     <a href="https://arxiv.org/abs/2412.xx">
         <img alt="arXiv" src="https://img.shields.io/badge/arXiv-Coming%20Soon-red">
     </a>
+   <a href="https://arxiv.org/abs/2412.xx">
+        <img alt="project webpage" src="https://img.shields.io/badge/Webpage-Coming%20Soon-red">
+    </a>
     <a href="https://github.com/ShihuaHuang95/DEIM/pulls">
         <img alt="prs" src="https://img.shields.io/github/issues-pr/ShihuaHuang95/DEIM">
     </a>
@@ -24,29 +27,22 @@
 </p>
 
 <p align="center">
-  DEIM is a novel training framewokr that enhances the matching mechanism in the DETR framework, achieving faster convergence and higher accuracy for real-time DETRs.
+  DEIM is a novel training framework that enhances the matching mechanism in the DETR framework, achieving faster convergence and higher accuracy for real-time DETRs.
 </p>
 
 ---
-<!-- 
-<p align="center">
-    [Shihua Huang](http://www.shihuahuang.cn/)<sup>1</sup>, 
-    [Zhichao Lu](https://scholar.google.com/citations?user=tIFWBcQAAAAJ&hl=en)<sup>2</sup>, 
-    [Xiaodong Cun](https://vinthony.github.io/academic/)<sup>3</sup>, 
-    [Yongjun Yu](#)<sup>1</sup>, 
-    [Xiao Zhou](#)<sup>4</sup>, 
-    [Xi Shen](https://xwcv.github.io)<sup>1</sup>
-</p> -->
 
-<p align="center">
-    Shihua Huang<sup>1</sup>, 
-    Zhichao Lu<sup>2</sup>,
-    Xiaodong Cun<sup>3</sup>,
-    Yongjun Yu<sup>1</sup>,
-    Xiao Zhou<sup>4</sup>, 
-    Xi Shen<sup>1</sup>
-</p>
 
+<div align="center">
+  <a href="http://www.shihuahuang.cn">Shihua Huang</a><sup>1</sup>,
+  <a href="https://scholar.google.com/citations?user=tIFWBcQAAAAJ&hl=en">Zhichao Lu</a><sup>2</sup>,
+  <a href="https://vinthony.github.io/academic/">Xiaodong Cun</a><sup>3</sup>,
+  Yongjun Yu<sup>1</sup>,
+  Xiao Zhou<sup>4</sup>, 
+  <a href="https://xishen0220.github.io">Xi Shen</a><sup>1*</sup>
+</div>
+
+  
 <p align="center">
 <i>
 1. Intellindust AI Lab &nbsp; 2. City University of Hong Kong &nbsp; 3. Great Bay University &nbsp; 4. Hefei Normal University
@@ -56,6 +52,7 @@
 <p align="center">
   **📧 Corresponding author:** <a href="mailto:shenxiluc@gmail.com">shenxiluc@gmail.com</a>
 </p>
+
 
 <p align="center">
 <strong>If you like , please give us a ⭐! Your support motivates us to keep improving!</strong>
@@ -67,10 +64,21 @@
 
 </details>
 
+ 
+  
 ## 🚀 Updates
 - [x] **\[2024.12.03\]** Release DEIM series. Besides, DEIM repo supports the re-implmentations of [D-FINE](https://arxiv.org/abs/2410.13842) and [RT-DETR](https://arxiv.org/abs/2407.17140).
 
-## Model Zoo
+## Table of Content
+* [1. Model Zoo](https://github.com/ShihuaHuang95/DEIM?tab=readme-ov-file#1-model-zoo)
+* [2. Quick start](https://github.com/ShihuaHuang95/DEIM?tab=readme-ov-file#2-quick-start)
+* [3. Usage](https://github.com/ShihuaHuang95/DEIM?tab=readme-ov-file#3-usage)
+* [4. Tools](https://github.com/ShihuaHuang95/DEIM?tab=readme-ov-file#4-tools)
+* [5. Citation](https://github.com/ShihuaHuang95/DEIM?tab=readme-ov-file#5-citation)
+* [6. Acknowledgement](https://github.com/ShihuaHuang95/DEIM?tab=readme-ov-file#6-acknowledgement)
+  
+  
+## 1. Model Zoo
 
 ### DEIM-D-FINE
 | Model | Dataset | AP<sup>val</sup> | #Params | Latency | GFLOPs | config | checkpoint
@@ -80,6 +88,10 @@
 **L** | COCO | **54.7** | 31M | 8.07ms | 91 | [yml](./configs/deim_dfine/deim_hgnetv2_l_coco.yml) | [ckpt](https://drive.google.com/file/d/1PIRf02XkrA2xAD3wEiKE2FaamZgSGTAr/view?usp=drive_link) | 
 **X** | COCO | **56.5** | 62M | 12.89ms | 202 | [yml](./configs/deim_dfine/deim_hgnetv2_x_coco.yml) | [ckpt](https://drive.google.com/file/d/1dPtbgtGgq1Oa7k_LgH1GXPelg1IVeu0j/view?usp=drive_link) | 
 
+<details>
+<summary>
+</summary>
+</details>
 
 ### DEIM-RTDETRv2
 | Model | Dataset | AP<sup>val</sup> | #Params | Latency | GFLOPs | config | checkpoint
@@ -91,7 +103,7 @@
 **X** | COCO | **55.5** | 76M | 13.66ms | 259 | [yml](./configs/deim_rtdetrv2/deim_r101vd_60e_coco.yml) | [ckpt](https://drive.google.com/file/d/153_JKff6EpFgiLKaqkJsoDcLal_0ux_F/view?usp=drive_link) | 
 
 
-## Quick start
+## 2. Quick start
 
 ### Setup
 
@@ -224,7 +236,7 @@ To train on your custom dataset, you need to organize it in the COCO format. Fol
 </details>
 
 
-## Usage
+## 3. Usage
 <details open>
 <summary> COCO2017 </summary>
 
@@ -316,7 +328,7 @@ If you'd like to train **DEIM** on COCO2017 with an input size of 320x320, follo
 
 </details>
 
-## Tools
+## 4. Tools
 <details>
 <summary> Deployment </summary>
 
@@ -407,7 +419,7 @@ python reference/convert_weight.py model.pth
 </details>
 
 
-## Citation
+## 5. Citation
 If you use `DEIM` or its methods in your work, please cite the following BibTeX entries:
 <details open>
 <summary> bibtex </summary>
@@ -423,7 +435,7 @@ If you use `DEIM` or its methods in your work, please cite the following BibTeX 
 ```
 </details>
 
-## Acknowledgement
+## 6. Acknowledgement
 Our work is built upon [D-FINE](https://github.com/Peterande/D-FINE) and [RT-DETR](https://github.com/lyuwenyu/RT-DETR).
 
 ✨ Feel free to contribute and reach out if you have any questions! ✨
