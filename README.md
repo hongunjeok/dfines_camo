@@ -27,7 +27,7 @@
 </p>
 
 <p align="center">
-  DEIM is a novel training framework that enhances the matching mechanism in the DETR framework, achieving faster convergence and higher accuracy for real-time DETRs.
+  DEIM is an effective training framework that enhances the matching mechanism in the DETR framework, achieving faster convergence and higher accuracy for real-time DETRs. It can be the fundermantal framework for the future research in real-time object detection.
 </p>
 
 ---
@@ -55,7 +55,7 @@
 
 
 <p align="center">
-<strong>If you like , please give us a ⭐! Your support motivates us to keep improving!</strong>
+<strong>If you find our work helpful, please consider giving us a ⭐!</strong>
 </p>
 
 <p align="center">
@@ -67,7 +67,7 @@
  
   
 ## 🚀 Updates
-- [x] **\[2024.12.03\]** Release DEIM series. Besides, DEIM repo supports the re-implmentations of [D-FINE](https://arxiv.org/abs/2410.13842) and [RT-DETR](https://arxiv.org/abs/2407.17140).
+- [x] **\[2024.12.03\]** Release DEIM series. Besides, this repo also supports the re-implmentations of [D-FINE](https://arxiv.org/abs/2410.13842) and [RT-DETR](https://arxiv.org/abs/2407.17140).
 
 ## Table of Content
 * [1. Model Zoo](https://github.com/ShihuaHuang95/DEIM?tab=readme-ov-file#1-model-zoo)
