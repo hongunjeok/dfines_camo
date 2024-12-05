@@ -58,8 +58,10 @@
 <strong>If you find our work helpful, please consider giving us a ⭐!</strong>
 </p>
 
+
 <p align="center">
-    <img src="./figures/teaser.png" width="1000">
+  <img src="./figures/teaser_a.png" alt="Image 1" width="49%">
+  <img src="./figures/teaser_b.png" alt="Image 2" width="49%">
 </p>
 
 </details>
