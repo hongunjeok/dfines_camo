@@ -27,7 +27,7 @@
 </p>
 
 <p align="center">
-  DEIM is an effective training framework that enhances the matching mechanism in the DETR framework, achieving faster convergence and higher accuracy for real-time DETRs. It can be the fundermantal framework for the future research in real-time object detection.
+    DEIM is an advanced training framework designed to enhance the matching mechanism in DETRs, enabling faster convergence and improved accuracy. It serves as a robust foundation for future research and applications in the field of real-time object detection. 
 </p>
 
 ---
