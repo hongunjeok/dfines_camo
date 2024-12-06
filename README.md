@@ -6,8 +6,8 @@
     <a href="https://github.com/ShihuaHuang95/DEIM/blob/master/LICENSE">
         <img alt="license" src="https://img.shields.io/badge/LICENSE-Apache%202.0-blue">
     </a>
-    <a href="https://arxiv.org/abs/2412.xx">
-        <img alt="arXiv" src="https://img.shields.io/badge/arXiv-Coming%20Soon-red">
+    <a href="https://arxiv.org/abs/2412.04234">
+        <img alt="arXiv" src="https://img.shields.io/badge/arXiv-2412.04234-red">
     </a>
    <a href="https://arxiv.org/abs/2412.xx">
         <img alt="project webpage" src="https://img.shields.io/badge/Webpage-Coming%20Soon-red">
@@ -427,6 +427,7 @@ If you use `DEIM` or its methods in your work, please cite the following BibTeX 
       title={DEIM: DETR with Improved Matching for Fast Convergence},
       author={Shihua Huang, Zhichao Lu, Xiaodong Cun, Yongjun Yu, Xiao Zhou, and Xi Shen},
       year={2024},
+      eprint={2412.04234},
       archivePrefix={arXiv},
       primaryClass={cs.CV}
 }
