@@ -228,7 +228,7 @@ class PResNet(nn.Module):
                 print(f"Loaded PResNet{depth} from local file@{model_path}.")
             else:
                 if isinstance(pretrained, bool) or 'http' in pretrained:
-                    state = torch.hub.load_state_dict_from_url(donwload_url[depth], map_location='cpu', model_dir='weight')
+                    state = torch.hub.load_state_dict_from_url(donwload_url[depth], map_location='cpu', model_dir=local_model_dir)
                 else:
                     state = torch.load(pretrained, map_location='cpu')
             self.load_state_dict(state)
