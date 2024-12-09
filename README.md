@@ -9,8 +9,8 @@
     <a href="https://arxiv.org/abs/2412.04234">
         <img alt="arXiv" src="https://img.shields.io/badge/arXiv-2412.04234-red">
     </a>
-   <a href="https://arxiv.org/abs/2412.xx">
-        <img alt="project webpage" src="https://img.shields.io/badge/Webpage-Coming%20Soon-red">
+   <a href="https://www.shihuahuang.cn/DEIM/">
+        <img alt="project webpage" src="https://img.shields.io/badge/Webpage-DEIM-purple">
     </a>
     <a href="https://github.com/ShihuaHuang95/DEIM/pulls">
         <img alt="prs" src="https://img.shields.io/github/issues-pr/ShihuaHuang95/DEIM">
