@@ -20,7 +20,7 @@ import time
 import tqdm
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..'))
-from src.core import YAMLConfig
+from engine.core import YAMLConfig
 
 def kill_existing_mongod():
     try:

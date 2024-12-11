@@ -16,7 +16,7 @@ import random
 import matplotlib.pyplot as plt
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
-from src.core import YAMLConfig
+from engine.core import YAMLConfig
 
 
 label_map = {
