@@ -55,7 +55,7 @@
 
 
 <p align="center">
-<strong>If you find our work helpful, please consider giving us a ⭐!</strong>
+<strong>If you like our work, please give us a ⭐!</strong>
 </p>
 
 
@@ -70,6 +70,7 @@
   
 ## 🚀 Updates
 - [x] **\[2024.12.03\]** Release DEIM series. Besides, this repo also supports the re-implmentations of [D-FINE](https://arxiv.org/abs/2410.13842) and [RT-DETR](https://arxiv.org/abs/2407.17140).
+- [x] **\[2024.12.26\]** A more efficient implementation of Dense O2O, achieving nearly a 30% improvement in loading speed. Huge thanks to my colleague [Longfei Liu](https://github.com/capsule2077).
 
 ## Table of Content
 * [1. Model Zoo](https://github.com/ShihuaHuang95/DEIM?tab=readme-ov-file#1-model-zoo)
