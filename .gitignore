@@ -135,4 +135,4 @@ dmypy.json
 *.onnx
 *.zip
 *.html
-.DS_Store
+.DS_Storewandb/
