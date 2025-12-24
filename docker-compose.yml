@@ -1,0 +1,49 @@
+version: '2.3'
+  
+services:
+  main:
+    container_name: DEIM_graduate
+    image : deim_main
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    runtime: nvidia
+    restart: always
+    ipc: "host"
+    env_file:
+      - "docker-compose-env/main.env"
+    volumes:
+      - type: volume
+        source: mldisk2
+        target: /mldisk2
+        volume:
+          nocopy: true
+      - type: volume
+        source: mlsun
+        target: /mlsun
+        volume:
+          nocopy: true
+      - /media/mmlab/hdd:/hdd
+    expose:
+      - "8888"
+      - "8000"
+      - "22"
+    ports:
+      - "9923:8000"
+      - "9922:8888"
+      - "9921:22"
+    stdin_open: true
+    tty: true
+
+volumes:
+  mldisk2:
+    driver_opts:
+      type: "nfs"
+      o: "addr=mldisk2.sogang.ac.kr,nolock,soft,rw"
+      device: ":/volume1/nfs_shared"
+  mlsun:
+    driver_opts:
+      type: "nfs"
+      o: "addr=mlsun.sogang.ac.kr,nolock,soft,rw"
+      device: ":/volume1/nfs_shared"
+

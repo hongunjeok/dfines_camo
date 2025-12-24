@@ -20,25 +20,22 @@ from engine.core import YAMLConfig
 
 
 label_map = {
-    1: 'person', 2: 'bicycle', 3: 'car', 4: 'motorbike', 5: 'aeroplane',
-    6: 'bus', 7: 'train', 8: 'truck', 9: 'boat', 10: 'trafficlight',
-    11: 'firehydrant', 12: 'streetsign', 13: 'stopsign', 14: 'parkingmeter',
-    15: 'bench', 16: 'bird', 17: 'cat', 18: 'dog', 19: 'horse',
-    20: 'sheep', 21: 'cow', 22: 'elephant', 23: 'bear', 24: 'zebra',
-    25: 'giraffe', 26: 'hat', 27: 'backpack', 28: 'umbrella', 29: 'shoe',
-    30: 'eyeglasses', 31: 'handbag', 32: 'tie', 33: 'suitcase', 34: 'frisbee',
-    35: 'skis', 36: 'snowboard', 37: 'sportsball', 38: 'kite', 39: 'baseballbat',
-    40: 'baseballglove', 41: 'skateboard', 42: 'surfboard', 43: 'tennisracket',
-    44: 'bottle', 45: 'plate', 46: 'wineglass', 47: 'cup', 48: 'fork',
-    49: 'knife', 50: 'spoon', 51: 'bowl', 52: 'banana', 53: 'apple',
-    54: 'sandwich', 55: 'orange', 56: 'broccoli', 57: 'carrot', 58: 'hotdog',
-    59: 'pizza', 60: 'donut', 61: 'cake', 62: 'chair', 63: 'sofa',
-    64: 'pottedplant', 65: 'bed', 66: 'mirror', 67: 'diningtable', 68: 'window',
-    69: 'desk', 70: 'toilet', 71: 'door', 72: 'tv', 73: 'laptop',
-    74: 'mouse', 75: 'remote', 76: 'keyboard', 77: 'cellphone', 78: 'microwave',
-    79: 'oven', 80: 'toaster', 81: 'sink', 82: 'refrigerator', 83: 'blender',
-    84: 'book', 85: 'clock', 86: 'vase', 87: 'scissors', 88: 'teddybear',
-    89: 'hairdrier', 90: 'toothbrush', 91: 'hairbrush'
+     1: "person", 2: "bicycle", 3: "car", 4: "motorcycle", 5: "airplane",
+     6: "bus", 7: "train", 8: "truck", 9: "boat", 10: "traffic light",
+    11: "fire hydrant", 12: "stop sign", 13: "parking meter", 14: "bench", 15: "bird",
+    16: "cat", 17: "dog", 18: "horse", 19: "sheep", 20: "cow",
+    21: "elephant", 22: "bear", 23: "zebra", 24: "giraffe", 25: "backpack",
+    26: "umbrella", 27: "handbag", 28: "tie", 29: "suitcase", 30: "frisbee",
+    31: "skis", 32: "snowboard", 33: "sports ball", 34: "kite", 35: "baseball bat",
+    36: "baseball glove", 37: "skateboard", 38: "surfboard", 39: "tennis racket", 40: "bottle",
+    41: "wine glass", 42: "cup", 43: "fork", 44: "knife", 45: "spoon",
+    46: "bowl", 47: "banana", 48: "apple", 49: "sandwich", 50: "orange",
+    51: "broccoli", 52: "carrot", 53: "hot dog", 54: "pizza", 55: "donut",
+    56: "cake", 57: "chair", 58: "couch", 59: "potted plant", 60: "bed",
+    61: "dining table", 62: "toilet", 63: "tv", 64: "laptop", 65: "mouse",
+    66: "remote", 67: "keyboard", 68: "cell phone", 69: "microwave", 70: "oven",
+    71: "toaster", 72: "sink", 73: "refrigerator", 74: "book", 75: "clock",
+    76: "vase", 77: "scissors", 78: "teddy bear", 79: "hair drier", 80: "toothbrush"
 }
 
 # 自动生成颜色（使用 matplotlib 的配色方案）
@@ -203,7 +200,7 @@ def main(args):
             return outputs
 
     model = Model()
-    process_dataset(model, args.dataset, args.output, thrh=0.5)
+    process_dataset(model, args.dataset, args.output, thrh=0.25)
     # file_path = args.input
     # if os.path.splitext(file_path)[-1].lower() in ['.jpg', '.jpeg', '.png', '.bmp']:
     #     process_image(model, file_path)

@@ -9,6 +9,7 @@ Copyright (c) 2024 D-FINE authors. All Rights Reserved.
 import time
 import json
 import datetime
+import wandb
 
 import torch
 
@@ -45,12 +46,9 @@ class DetSolver(BaseSolver):
         if self.last_epoch > 0:
             module = self.ema.module if self.ema else self.model
             test_stats, coco_evaluator = evaluate(
-                module,
-                self.criterion,
-                self.postprocessor,
-                self.val_dataloader,
-                self.evaluator,
-                self.device
+                module, self.criterion, self.postprocessor,
+                self.val_dataloader, self.evaluator, self.device,
+                epoch=self.last_epoch  # CHANGED
             )
             for k in test_stats:
                 best_stat['epoch'] = self.last_epoch
@@ -106,12 +104,9 @@ class DetSolver(BaseSolver):
 
             module = self.ema.module if self.ema else self.model
             test_stats, coco_evaluator = evaluate(
-                module,
-                self.criterion,
-                self.postprocessor,
-                self.val_dataloader,
-                self.evaluator,
-                self.device
+                module, self.criterion, self.postprocessor,
+                self.val_dataloader, self.evaluator, self.device,
+                epoch=epoch  # CHANGED
             )
 
             # TODO
@@ -161,6 +156,9 @@ class DetSolver(BaseSolver):
                 'epoch': epoch,
                 'n_parameters': n_parameters
             }
+            
+            if dist_utils.is_main_process():
+                wandb.log(log_stats)
 
             if self.output_dir and dist_utils.is_main_process():
                 with (self.output_dir / "log.txt").open("a") as f:

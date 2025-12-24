@@ -6,7 +6,7 @@ Modified from DETR (https://github.com/facebookresearch/detr/blob/main/engine.py
 Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
 """
 
-
+import wandb
 import sys
 import math
 from typing import Iterable
@@ -19,7 +19,10 @@ from torch.cuda.amp.grad_scaler import GradScaler
 from ..optim import ModelEMA, Warmup
 from ..data import CocoEvaluator
 from ..misc import MetricLogger, SmoothedValue, dist_utils
+import numpy as np  # NEW
 
+wandb.init(project='Camo_small', config={'dataset' : 'camo'})
+config = wandb.config
 
 def train_one_epoch(self_lr_scheduler, lr_scheduler, model: torch.nn.Module, criterion: torch.nn.Module,
                     data_loader: Iterable, optimizer: torch.optim.Optimizer,
@@ -109,12 +112,13 @@ def train_one_epoch(self_lr_scheduler, lr_scheduler, model: torch.nn.Module, cri
         metric_logger.update(loss=loss_value, **loss_dict_reduced)
         metric_logger.update(lr=optimizer.param_groups[0]["lr"])
 
-        if writer and dist_utils.is_main_process() and global_step % 10 == 0:
-            writer.add_scalar('Loss/total', loss_value.item(), global_step)
+        # WandB 로깅 추가
+        if dist_utils.is_main_process() and global_step % 10 == 0:
+            wandb.log({"Loss/total": loss_value.item(), "epoch": epoch, "step": global_step})
             for j, pg in enumerate(optimizer.param_groups):
-                writer.add_scalar(f'Lr/pg_{j}', pg['lr'], global_step)
+                wandb.log({f'Lr/pg_{j}': pg['lr']})
             for k, v in loss_dict_reduced.items():
-                writer.add_scalar(f'Loss/{k}', v.item(), global_step)
+                wandb.log({f'Loss/{k}': v.item(), "epoch": epoch, "step": global_step})
 
     # gather the stats from all processes
     metric_logger.synchronize_between_processes()
@@ -123,55 +127,99 @@ def train_one_epoch(self_lr_scheduler, lr_scheduler, model: torch.nn.Module, cri
 
 
 @torch.no_grad()
-def evaluate(model: torch.nn.Module, criterion: torch.nn.Module, postprocessor, data_loader, coco_evaluator: CocoEvaluator, device):
+def evaluate(model: torch.nn.Module, criterion: torch.nn.Module, postprocessor, data_loader, coco_evaluator: CocoEvaluator, device, epoch: int = None):  # CHANGED
     model.eval()
     criterion.eval()
     coco_evaluator.cleanup()
 
     metric_logger = MetricLogger(delimiter="  ")
-    # metric_logger.add_meter('class_error', SmoothedValue(window_size=1, fmt='{value:.2f}'))
     header = 'Test:'
 
-    # iou_types = tuple(k for k in ('segm', 'bbox') if k in postprocessor.keys())
     iou_types = coco_evaluator.iou_types
-    # coco_evaluator = CocoEvaluator(base_ds, iou_types)
-    # coco_evaluator.coco_eval[iou_types[0]].params.iouThrs = [0, 0.1, 0.5, 0.75]
 
     for samples, targets in metric_logger.log_every(data_loader, 10, header):
         samples = samples.to(device)
         targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
 
         outputs = model(samples)
-
         orig_target_sizes = torch.stack([t["orig_size"] for t in targets], dim=0)
-
         results = postprocessor(outputs, orig_target_sizes)
-
-        # if 'segm' in postprocessor.keys():
-        #     target_sizes = torch.stack([t["size"] for t in targets], dim=0)
-        #     results = postprocessor['segm'](results, outputs, orig_target_sizes, target_sizes)
 
         res = {target['image_id'].item(): output for target, output in zip(targets, results)}
         if coco_evaluator is not None:
             coco_evaluator.update(res)
 
-    # gather the stats from all processes
     metric_logger.synchronize_between_processes()
     print("Averaged stats:", metric_logger)
     if coco_evaluator is not None:
         coco_evaluator.synchronize_between_processes()
-
-    # accumulate predictions from all images
-    if coco_evaluator is not None:
         coco_evaluator.accumulate()
         coco_evaluator.summarize()
 
     stats = {}
-    # stats = {k: meter.global_avg for k, meter in metric_logger.meters.items()}
     if coco_evaluator is not None:
         if 'bbox' in iou_types:
             stats['coco_eval_bbox'] = coco_evaluator.coco_eval['bbox'].stats.tolist()
         if 'segm' in iou_types:
             stats['coco_eval_masks'] = coco_evaluator.coco_eval['segm'].stats.tolist()
+
+    # ✅ WandB 로깅 추가 (AP, AR 기록)
+    if dist_utils.is_main_process():
+        bbox_stats = stats.get('coco_eval_bbox', [])  # stats에서 bbox key 가져오고, 없으면 빈 리스트 반환
+        
+        wandb.log({
+            "Evaluation/AP (IoU=0.50:0.95, all)": bbox_stats[0] if len(bbox_stats) > 0 else 0,  # AP 0.50:0.95
+            "Evaluation/AP (IoU=0.50, all)": bbox_stats[1] if len(bbox_stats) > 1 else 0,  # AP 0.50
+            "Evaluation/AP (IoU=0.75, all)": bbox_stats[2] if len(bbox_stats) > 2 else 0,  # AP 0.75
+            "Evaluation/AP (IoU=0.50:0.95, small)": bbox_stats[3] if len(bbox_stats) > 3 else 0,  # AP small
+            "Evaluation/AP (IoU=0.50:0.95, medium)": bbox_stats[4] if len(bbox_stats) > 4 else 0,  # AP medium
+            "Evaluation/AP (IoU=0.50:0.95, large)": bbox_stats[5] if len(bbox_stats) > 5 else 0,  # AP large
+            "Evaluation/AR (IoU=0.50:0.95, maxDets=1)": bbox_stats[6] if len(bbox_stats) > 6 else 0,  # AR maxDets=1
+            "Evaluation/AR (IoU=0.50:0.95, maxDets=10)": bbox_stats[7] if len(bbox_stats) > 7 else 0,  # AR maxDets=10
+            "Evaluation/AR (IoU=0.50:0.95, maxDets=100)": bbox_stats[8] if len(bbox_stats) > 8 else 0,  # AR maxDets=100
+            "Evaluation/AR (IoU=0.50:0.95, small)": bbox_stats[9] if len(bbox_stats) > 9 else 0,  # AR small
+            "Evaluation/AR (IoU=0.50:0.95, medium)": bbox_stats[10] if len(bbox_stats) > 10 else 0,  # AR medium
+            "Evaluation/AR (IoU=0.50:0.95, large)": bbox_stats[11] if len(bbox_stats) > 11 else 0,  # AR large
+        })
+
+    # === [NEW] 클래스별 AP 로깅 ===
+    if dist_utils.is_main_process() and coco_evaluator is not None and 'bbox' in iou_types:
+        ce = coco_evaluator.coco_eval['bbox']           # pycocotools.cocoeval.COCOeval
+        precisions = ce.eval['precision']               # shape: [T, R, K, A, M]
+        if precisions is not None:
+            iou_thrs = ce.params.iouThrs                # 길이 T
+            # area=all, maxDets=100 인덱스 선택
+            aind = 0
+            if hasattr(ce.params, 'areaRngLbl') and 'all' in ce.params.areaRngLbl:
+                aind = ce.params.areaRngLbl.index('all')
+            mind = len(ce.params.maxDets) - 1
+            if 100 in ce.params.maxDets:
+                mind = ce.params.maxDets.index(100)
+            # IoU=0.50 인덱스
+            t50 = int(np.where(np.isclose(iou_thrs, 0.5))[0][0])
+
+            # 카테고리 이름들
+            cats = ce.cocoGt.loadCats(ce.params.catIds)
+            names = [c['name'] for c in cats]
+
+            class_logs = {}
+            for k, name in enumerate(names):
+                # AP@[.50:.95]: 모든 IoU/recall 평균
+                p = precisions[:, :, k, aind, mind]
+                p = p[p > -1]
+                ap = float(np.mean(p)) if p.size else 0.0
+
+                # AP@.50: IoU=0.5 슬라이스만 평균
+                p50 = precisions[t50, :, k, aind, mind]
+                p50 = p50[p50 > -1]
+                ap50 = float(np.mean(p50)) if p50.size else 0.0
+
+                class_logs[f"ClassAP/AP@[.50:.95]/{name}"] = ap
+                class_logs[f"ClassAP/AP@.50/{name}"] = ap50
+
+            if epoch is not None:
+                class_logs["epoch"] = epoch
+            wandb.log(class_logs)
+
 
     return stats, coco_evaluator
