@@ -77,8 +77,8 @@ PostProcessor:
 
 
 DEIMCriterion:
-  weight_dict: {loss_vfl: 1, loss_bbox: 5, loss_giou: 2, loss_fgl: 0.15, loss_ddf: 1.5}
-  losses: ['vfl', 'boxes', 'local']
+  weight_dict: {loss_vfl: 1, loss_bbox: 5, loss_giou: 2, loss_fgl: 0.15, loss_ddf: 1.5, loss_sem_proto: 0.1, proto_detach: "early", sem_warmup: 800}
+  losses: ['vfl', 'boxes', 'local', 'sem_proto']
   alpha: 0.75
   gamma: 2.0
   reg_max: 32

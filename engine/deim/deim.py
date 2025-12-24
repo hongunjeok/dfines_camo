@@ -13,22 +13,24 @@ __all__ = ['DEIM', ]
 class DEIM(nn.Module):
     __inject__ = ['backbone', 'encoder', 'decoder', ]
 
-    def __init__(self, \
-        backbone: nn.Module,
-        encoder: nn.Module,
-        decoder: nn.Module,
-    ):
+    def __init__(self, backbone: nn.Module, encoder: nn.Module, decoder: nn.Module):
         super().__init__()
         self.backbone = backbone
         self.decoder = decoder
         self.encoder = encoder
+        
 
     def forward(self, x, targets=None):
-        x = self.backbone(x)
-        x = self.encoder(x)
-        x = self.decoder(x, targets)
+        feats = self.backbone(x)                # list/tuple of feats
+        feats = self.encoder(feats)             # HybridEncoder.forward -> outs (list)
+        outputs = self.decoder(feats, targets)  # dict (pred_logits, pred_boxes, ...)
 
-        return x
+        # ★ 여기서 sem_feats를 outputs에 실어 보냄 (학습 시에만)
+        if self.training and getattr(self.encoder, "last_sem_feats", None) is not None:
+            outputs["sem_feats"] = self.encoder.last_sem_feats
+            
+
+        return outputs
 
     def deploy(self, ):
         self.eval()
